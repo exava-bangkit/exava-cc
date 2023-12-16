@@ -41,5 +41,5 @@ app.use('/', appRoutes);
 
 // Gunakan port server
 app.listen(5050, ()=>{
-    console.log('Server Berjalan di Port : '+5050);
+    console.log('Server ini Berjalan di Port : '+5050);
 });

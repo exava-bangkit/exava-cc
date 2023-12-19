@@ -1,11 +1,3 @@
-// module.exports = {
-//     multipleStatements  : true,
-//     host                : '34.101.81.213',
-//     user                : 'root',
-//     password            : 'rahasiasia',
-//     database            : 'exava'
-// };
-
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 

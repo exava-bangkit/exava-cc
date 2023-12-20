@@ -1,10 +1,6 @@
-runtime: nodejs18
+runtime: nodejs20
 
 env: standard
-
-before_script:
-  - npm install
-  - npm run build:tsc
 
 handlers:
 - url: /.*

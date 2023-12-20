@@ -8,6 +8,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "build:tsc": "tsc",
+    "start": "ts-node main.ts",    
     "dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watchAll --coverage"
@@ -57,6 +58,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }

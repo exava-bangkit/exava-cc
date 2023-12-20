@@ -1,15 +1,11 @@
-runtime: nodejs16  # Sesuaikan dengan versi Node.js yang dibutuhkan
+runtime: nodejs18
 
-env_variables:
-  NODE_ENV: production
+env: standard
 
-# Sesuaikan dengan skrip build di package.json
-build_commands:
+before_script:
   - npm install
-  - npm run build
+  - npm run build:tsc
 
-# Sesuaikan dengan port yang digunakan aplikasi
 handlers:
 - url: /.*
-  script: auto
-  secure: always  # Paksa HTTPS untuk keamanan
+  script: dist/main.js

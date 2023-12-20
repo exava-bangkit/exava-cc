@@ -1,64 +1,122 @@
-## Backend APIs
+# Hapi.js and typescript scaffolding 
+We @ [nomado](https://www.nomado.eu) love [hapi.js](https://www.hapi.dev). If you haven't used this beautiful, scalable and carefully crafted framework for real world application, you should check it out!
 
-**Base URL:** [https://exava-ch2-ps503-408514.et.r.appspot.com/](https://exava-ch2-ps503-408514.et.r.appspot.com/)
+This is our official starter kit which has been tested in our production and passed all the scalability, performance and reliability expectations.
 
-### Authentication and Authorization
+## Getting started
 
-This API utilizes JWT token-based authentication. All endpoints except `/api/test/all` require a valid token for access. You can obtain tokens through signup and signin processes.
 
-### Endpoints
+### Prerequisites
 
-Each endpoint is described with details including:
+Clone this repo.
+```
+git clone https://github.com/nomadovoip/hapi-typescript-boilerplate.git`
+```
 
-* **Method:** HTTP method used (GET, POST, PUT, etc.)
-* **URL:** Path of the endpoint.
-* **Action:** Brief description of the endpoint's purpose.
-* **Authorization:** Whether token is required and the necessary access level (none, public, user, moderator, admin).
-* **Request (optional):** Required parameters and their descriptions.
-* **Response (optional):** Data structure returned and descriptions of each field.
+### Installation
 
-### Endpoint List
+install dependencies
+```js
+npm install
+```
 
-| Method | URL | Action | Authorization | Request | Response |
-|---|---|---|---|---|---|
-| POST | /api/auth/signup | Register a new account | none | email, password | `{ message: "Successful signup!" }` |
-| POST | /api/auth/signin | Login to an account | none | email, password | `{ token: "your_token", userId: 123 }` |
-| POST | /api/auth/signout | Logout from an account | token | none | `{ message: "Logged out successfully!" }` |
-| GET | /api/test/all | Retrieve public content | none | none | `{ publicContent: "This is public data!" }` |
-| GET | /api/test/user | Access User's content | token, user | none | `{ userContent: "This is user-specific data!" }` |
-| GET | /api/test/mod | Access Moderator's content | token, moderator | none | `{ moderatorContent: "This is moderator-only data!" }` |
-| GET | /api/test/admin | Access Admin's content | token, admin | none | `{ adminContent: "This is admin-exclusive data!" }` |
+### Usage
 
-### Authentication and Authorization Details
+To run locally for development
+```node
+npm run dev
+```
 
-* **Valid token required for all endpoints except `/api/test/all`.**
-* Tokens are generated upon successful signup and signin.
-* Tokens are stored in session cookies (`req.session.token`).
-* The `verifyToken` middleware verifies tokens and extracts user ID from the payload.
-* The `isAdmin`, `isModerator`, and `isModeratorOrAdmin` middlewares control access based on user roles.
+To build a bundled transpiled javascript app
+```node
+npm run build
+```
 
-### Common Errors
+You should see the output in your terminal:
+```
+# npm run dev
 
-* **401 Unauthorized:** Invalid or missing token.
-* **403 Forbidden:** Insufficient access due to insufficient user role.
-* **500 Internal Server Error:** Internal server error occurred.
+> hapi-typescript-boilerplate@1.0.0 dev /Users/alex/Documents/projects/hapi-typescript-boilerplate
+> nodemon
 
-### Notes
+[nodemon] 2.0.2
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching dir(s): src/**/* main.ts
+[nodemon] watching extensions: ts
+[nodemon] starting `ts-node ./main.ts`
+Server running at: http://mypc.local:3000
+```
 
-* This documentation is under development and may change with API updates.
-* Please report issues or ask questions through the issue tracker in your GitHub repository.
+### Running tests (using Jest)
 
-We hope this documentation helps you use the API effectively!
+```node
+npm t
+```
 
-### Additional Code Comments
+Running tests in watch mode along with coverage
+```node
+npm run test:watch
+```
 
-**authJWT.js:**
+**OR** without coverage
 
-Consider utilizing this module separately and eliminating code duplication with the existing authJWT.js.
+```node
+npm run test -- --watch
+```
 
-**verifySignUp.js:**
+### Deployment
 
-This module appears identical to authJWT.js and might be unnecessary due to function duplication.
+#### Deploying manually
+Build the bundle: leveraging webpack, we can compile our code and bundle it together so you no longer need to maintain dependencies in production environment.
 
-**Please remember that this is a sample documentation framework and may need adjustments based on your specific API specifications.**
+```node
+npm run bundle
+```
 
+Above script will produce `dist` folder that contains your compiled application. you can now simply `node ./dist/main.js` or use `pm2` as your process manager `pm2 start ./dist/main.js`
+
+
+#### Docker
+
+For a devOps, you cannot ignore the contributions made by [Docker](https://www.docker.com/) to bring inner peace in their lives. 
+
+TODO: Docker deployment guide
+
+In progress. 
+
+# TODO
+ - [x] Stop being lazy and move the kit to opensource.
+ - [x] Configure basic structure
+ - [x] `Typescript`
+ - [x] `@Hapi/hapi` v19
+ - [x] `Webpack`
+ - [x] `Jest` configuration
+ - [x] LICENSE
+ - [x] Folder structure
+ - [ ] `supertest` integration
+ - [ ] Write example test with `jest` and `supertest`
+ - [x] Write Dockerfile
+ - [ ] Write docker-compose.yml file
+ - [ ] Write `FAQ`
+ - [ ] Write `Features`
+ - [ ] Configure `TravisCI`
+
+# Features
+TODO: Features
+In progress.
+
+# FAQ
+TODO: FAQ
+In progress.
+
+# Support
+Use any of the following medium for support:
+
+- Raise a ticket on [github](https://github.com/nomadovoip/hapi-typescript-boilerplate/issues)
+- Reach me on my email (in package.json)
+- Reach me on my linkedin.
+- Reach on [nomado website](https://www.nomado.eu) and ask for me on chat(Shold be used as rarely as possible!)
+
+
+# Contributors
+- [Asad Rizvi](https://www.linkedin.com/in/aleyrizvi/)

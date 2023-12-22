@@ -1,122 +1,50 @@
-# Hapi.js and typescript scaffolding 
-We @ [nomado](https://www.nomado.eu) love [hapi.js](https://www.hapi.dev). If you haven't used this beautiful, scalable and carefully crafted framework for real world application, you should check it out!
+## Backend APIs
 
-This is our official starter kit which has been tested in our production and passed all the scalability, performance and reliability expectations.
+**Base URL:** [https://exava-ch2-ps503-408514.et.r.appspot.com/](https://exava-ch2-ps503-408514.et.r.appspot.com/)
 
-## Getting started
+### Authentication and Authorization
 
+This API utilizes JWT token-based authentication.
 
-### Prerequisites
+### Endpoints
 
-Clone this repo.
-```
-git clone https://github.com/nomadovoip/hapi-typescript-boilerplate.git`
-```
+Each endpoint is described with details including:
 
-### Installation
+* **Method:** HTTP method used (GET, POST, PUT, etc.)
+* **URL:** Path of the endpoint.
+* **Action:** Brief description of the endpoint's purpose.
+* **Authorization:** Whether token is required and the necessary access level (none, public, user, moderator, admin).
+* **Request (optional):** Required parameters and their descriptions.
+* **Response (optional):** Data structure returned and descriptions of each field.
 
-install dependencies
-```js
-npm install
-```
+### Endpoint List
 
-### Usage
+| Method | URL | Action | Authorization | Request | Response |
+|---|---|---|---|---|---|
+| POST | /register | Register a new account | none | email, password | `{"message":"success","data":{"username":"...","email":"..."}}` |
+| POST | /login | Login to an account | none | email, password | `{"message": "success", "token": "..."}` |
+| GET | /tourism | Get all tourism content | none | none | `"message": "success",
+    "data": [ {"Place_Id": ..., "Place_Name": "...", "Description": "...", "Id_Category": ..., "Id_City": ..., "Price": ..., "Rating": ..., "Time_Minutes": ..., "Coordinate": "{lat: ..., lng: ...}", "Lat": "...", "Long": "..."}` |
+| GET | /tourism/1 | Get specific tourism content | none | none | `"message": "success",
+    "data": [ {"Place_Id": ..., "Place_Name": "...", "Description": "...", "Id_Category": ..., "Id_City": ..., "Price": ..., "Rating": ..., "Time_Minutes": ..., "Coordinate": "{lat: ..., lng: ...}", "Lat": "...", "Long": "..."}` |
 
-To run locally for development
-```node
-npm run dev
-```
+### Authentication and Authorization Details
 
-To build a bundled transpiled javascript app
-```node
-npm run build
-```
+* **Valid token required for all endpoints except `/api/test/all`.**
+* Tokens are generated upon successful signup and signin.
+* Tokens are stored in session cookies (`req.session.token`).
+* The `verifyToken` middleware verifies tokens and extracts user ID from the payload.
+* The `isAdmin`, `isModerator`, and `isModeratorOrAdmin` middlewares control access based on user roles.
 
-You should see the output in your terminal:
-```
-# npm run dev
+### Common Errors
 
-> hapi-typescript-boilerplate@1.0.0 dev /Users/alex/Documents/projects/hapi-typescript-boilerplate
-> nodemon
+* **401 Unauthorized:** Invalid or missing token.
+* **403 Forbidden:** Insufficient access due to insufficient user role.
+* **500 Internal Server Error:** Internal server error occurred.
 
-[nodemon] 2.0.2
-[nodemon] to restart at any time, enter `rs`
-[nodemon] watching dir(s): src/**/* main.ts
-[nodemon] watching extensions: ts
-[nodemon] starting `ts-node ./main.ts`
-Server running at: http://mypc.local:3000
-```
+### Notes
 
-### Running tests (using Jest)
+* This documentation is under development and may change with API updates.
+* Please report issues or ask questions through the issue tracker in your GitHub repository.
 
-```node
-npm t
-```
-
-Running tests in watch mode along with coverage
-```node
-npm run test:watch
-```
-
-**OR** without coverage
-
-```node
-npm run test -- --watch
-```
-
-### Deployment
-
-#### Deploying manually
-Build the bundle: leveraging webpack, we can compile our code and bundle it together so you no longer need to maintain dependencies in production environment.
-
-```node
-npm run bundle
-```
-
-Above script will produce `dist` folder that contains your compiled application. you can now simply `node ./dist/main.js` or use `pm2` as your process manager `pm2 start ./dist/main.js`
-
-
-#### Docker
-
-For a devOps, you cannot ignore the contributions made by [Docker](https://www.docker.com/) to bring inner peace in their lives. 
-
-TODO: Docker deployment guide
-
-In progress. 
-
-# TODO
- - [x] Stop being lazy and move the kit to opensource.
- - [x] Configure basic structure
- - [x] `Typescript`
- - [x] `@Hapi/hapi` v19
- - [x] `Webpack`
- - [x] `Jest` configuration
- - [x] LICENSE
- - [x] Folder structure
- - [ ] `supertest` integration
- - [ ] Write example test with `jest` and `supertest`
- - [x] Write Dockerfile
- - [ ] Write docker-compose.yml file
- - [ ] Write `FAQ`
- - [ ] Write `Features`
- - [ ] Configure `TravisCI`
-
-# Features
-TODO: Features
-In progress.
-
-# FAQ
-TODO: FAQ
-In progress.
-
-# Support
-Use any of the following medium for support:
-
-- Raise a ticket on [github](https://github.com/nomadovoip/hapi-typescript-boilerplate/issues)
-- Reach me on my email (in package.json)
-- Reach me on my linkedin.
-- Reach on [nomado website](https://www.nomado.eu) and ask for me on chat(Shold be used as rarely as possible!)
-
-
-# Contributors
-- [Asad Rizvi](https://www.linkedin.com/in/aleyrizvi/)
+We hope this documentation helps you use the API effectively!

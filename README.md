@@ -25,8 +25,7 @@ Each endpoint is described with details including:
 | POST | /login | Login to an account | none | email, password | `{"message": "success", "token": "..."}` |
 | GET | /tourism | Get all tourism content | none | none | `"message": "success",
     "data": [ {"Place_Id": ..., "Place_Name": "...", "Description": "...", "Id_Category": ..., "Id_City": ..., "Price": ..., "Rating": ..., "Time_Minutes": ..., "Coordinate": "{lat: ..., lng: ...}", "Lat": "...", "Long": "..."}` |
-| GET | /tourism/1 | Get specific tourism content | none | none | `"message": "success",
-    "data": [ {"Place_Id": ..., "Place_Name": "...", "Description": "...", "Id_Category": ..., "Id_City": ..., "Price": ..., "Rating": ..., "Time_Minutes": ..., "Coordinate": "{lat: ..., lng: ...}", "Lat": "...", "Long": "..."}` |
+| GET | /tourism/1 | Get specific tourism content | none | none | `"message": "success", "data": [ {"Place_Id": ..., "Place_Name": "...", "Description": "...", "Id_Category": ..., "Id_City": ..., "Price": ..., "Rating": ..., "Time_Minutes": ..., "Coordinate": "{lat: ..., lng: ...}", "Lat": "...", "Long": "..."}` |
 
 ### Authentication and Authorization Details
 

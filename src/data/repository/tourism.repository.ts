@@ -20,12 +20,20 @@ export default class TourismRepository {
             })
         })
     }
+    search = (query: string): Promise<Tourism[]> => {
+        return new Promise((resolve, reject) => {
+            connection.query<Tourism[]>("SELECT * FROM tourism_with_id WHERE LOWER(Place_Name) LIKE LOWER(?)", ['%' + query + '%'], (err, res) => {
+                if (err) reject(err)
+                else resolve(res)
+            })
+        })
+    }
     getByCategory = (id: number): Promise<Tourism> => {
-        return new Promise((resolve, reject)) => {
+        return new Promise((resolve, reject) => {
             connection.query<Tourism[]>("SELECT * FROM tourism_with_id WHERE Id_Category = ?", [id], (err, res) => {
                 if (err) reject(err);
                 else resolve(res?.[0]);
             })
-        }
+        })
     }
 }

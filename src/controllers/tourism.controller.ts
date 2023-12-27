@@ -34,11 +34,9 @@ const searchTourism = async (request: Request, h: ResponseToolkit): Promise<any>
         let searchBody = <SearchBody>request.payload
         let query = searchBody.query
         let value = await repository.search(query)
-        console.log(value)    
         return h.response({"message": "success", "data": value})
 
     } catch(e) {
-        console.error(e)
         return h.response({"message": "error", "data": e})
     }
     

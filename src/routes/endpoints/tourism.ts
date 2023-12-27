@@ -15,4 +15,11 @@ const tourismByIdRoute: iroute = {
     config: {auth: "jwt"},
     handler: tourismByIdController
 }
-export {tourismRoute, tourismByIdRoute}
+
+const tourismByCategoryRoute: iroute = {
+    path: '/tourism/category/{id}',
+    method: 'GET',
+    config: {auth: "jwt"},
+    handler: tourismByCategoryController
+}
+export {tourismRoute, tourismByIdRoute, tourismByCategoryRoute}

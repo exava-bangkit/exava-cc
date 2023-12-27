@@ -24,3 +24,13 @@ const tourismById = async (request: Request, h: ResponseToolkit): Promise<any> =
 
 }
 export const tourismByIdController = tourismById
+
+const tourismByCategory = async (request: Request, h: ResponseToolkit): Promise<any> => {
+    let id = request.params.id 
+    let value = await repository.getByCategory(parseInt(id))
+    console.log(value)
+
+    return h.response({"message": "success", "data": value})
+
+}
+export const tourismByCategoryController = tourismByCategory

@@ -4,6 +4,10 @@ import Tourism from "../data/model/tourism.model"
 
 const repository = new TourismRepository()
 
+interface SearchBody {
+    query: string
+}
+
 const tourismController  = async (request: Request, h: ResponseToolkit): Promise<any> => {
 
     let value = await repository.getAll()
@@ -24,3 +28,20 @@ const tourismById = async (request: Request, h: ResponseToolkit): Promise<any> =
 
 }
 export const tourismByIdController = tourismById
+
+const searchTourism = async (request: Request, h: ResponseToolkit): Promise<any> => {
+    try {
+        let searchBody = <SearchBody>request.payload
+        let query = searchBody.query
+        let value = await repository.search(query)
+        console.log(value)    
+        return h.response({"message": "success", "data": value})
+
+    } catch(e) {
+        console.error(e)
+        return h.response({"message": "error", "data": e})
+    }
+    
+
+}
+export const searchTourismController = searchTourism

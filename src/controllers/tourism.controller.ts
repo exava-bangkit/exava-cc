@@ -46,9 +46,22 @@ export const searchTourismController = searchTourism
 const tourismByCategory = async (request: Request, h: ResponseToolkit): Promise<any> => {
     let id = request.params.id 
     let value = await repository.getByCategory(parseInt(id))
-    console.log(value)
 
     return h.response({"message": "success", "data": value})
 
 }
 export const tourismByCategoryController = tourismByCategory
+
+const tourismRating = async (request: Request, h: ResponseToolkit): Promise<any> => {
+    let id = request.params.id 
+    let values = new Object()
+    for(let i = 1; i < 6; i++) {
+        Object.assign(values, {[i]: await repository.getRating(id, i)})
+    }
+    // let value = await repository.getRating(id, 5)
+    console.log(values)
+
+    return h.response({"message": "success", "data": values})
+
+}
+export const tourismRatingController = tourismRating

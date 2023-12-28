@@ -1,6 +1,6 @@
 import {iroute} from '../../config/interfaces'
 import response from '../../utils/response'
-import {searchTourismController, tourism, tourismByCategoryController, tourismByIdController} from '../../controllers/tourism.controller'
+import {searchTourismController, tourism, tourismByCategoryController, tourismByIdController, tourismRatingController} from '../../controllers/tourism.controller'
 
 const tourismRoute: iroute = {
     path: '/tourism',
@@ -29,4 +29,11 @@ const tourismByCategoryRoute: iroute = {
     config: {auth: "jwt"},
     handler: tourismByCategoryController
 }
-export {tourismRoute, tourismByIdRoute, tourismByCategoryRoute, searchTourism}
+
+const tourismRatingRoute: iroute = {
+    path: '/tourism/{id}/rating',
+    method: 'GET',
+    config: {auth: "jwt"},
+    handler: tourismRatingController
+}
+export {tourismRoute, tourismByIdRoute, tourismByCategoryRoute, searchTourism, tourismRatingRoute}

@@ -8,7 +8,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "build:tsc": "tsc",
-    "start": "ts-node main.ts",    
+    "start": "ts-node main.ts",
     "dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watchAll --coverage"
@@ -32,6 +32,8 @@
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.2",
     "@hapi/podium": "^4.1.1",
+    "@tensorflow/tfjs": "^4.15.0",
+    "@tensorflow/tfjs-node": "^4.15.0",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",

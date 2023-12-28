@@ -25,7 +25,7 @@ export default class AuthRepository {
         let today = new Date()
         let dateString = today.toISOString().slice(0, 10)
         return new Promise((resolve, reject) => {
-            connection.query<ResultSetHeader>("INSERT INTO exava.users (username, email, password, createdAt, updatedAt) VALUES(?, ?, ?, ?, ?)", [payload.username, payload.email, hash, dateString, dateString], (err, res) => {
+            connection.query<ResultSetHeader>("INSERT INTO exava.user (username, email, password, nama, Location, Age) VALUES(?, ?, ?, ?, ?)", [payload.username, payload.email, "Lorem Ipsum", "Jakarta Selatan, DKI Jakarta", 23], (err, res) => {
                 if (err) reject(err)
                 else this.getUserById({id: res.insertId} as GetUserByIdBody)
                     .then((item) => resolve(item))
@@ -35,7 +35,7 @@ export default class AuthRepository {
     }
     login = (payload: LoginBody): Promise<User> => {
         return new Promise((resolve, reject) => {
-            connection.query<User[]>("SELECT * FROM exava.users WHERE email = ?", [payload.email], (err, res) => {
+            connection.query<User[]>("SELECT * FROM exava.user WHERE email = ?", [payload.email], (err, res) => {
                 if (err) reject(err)
                 else {
                     let user = res?.[0]
@@ -54,7 +54,7 @@ export default class AuthRepository {
     }
     getUserById = (payload: GetUserByIdBody): Promise<User> => {
         return new Promise((resolve, reject) => {
-            connection.query<User[]>("SELECT * FROM users WHERE id = ?", [payload.id], (err, res) => {
+            connection.query<User[]>("SELECT * FROM user WHERE id = ?", [payload.id], (err, res) => {
                 if(err) reject(err)
                 else resolve(res?.[0])
             })

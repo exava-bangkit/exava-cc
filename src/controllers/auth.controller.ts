@@ -3,7 +3,7 @@ import response from '../utils/response'
 import { Boom } from '@hapi/boom'
 import Podium from '@hapi/podium'
 import JWT from "jsonwebtoken"
-import AuthRepository, { LoginBody, RegisterBody } from '../data/repository/auth.repository'
+import AuthRepository, { GetUserByIdBody, LoginBody, RegisterBody } from '../data/repository/auth.repository'
 
 interface UserInterface {
     id: number;
@@ -49,7 +49,7 @@ const loginController  = async (request: Request, h: ResponseToolkit): Promise<a
 
     try {
         let login = await repository.login(loginInput)
-        let payload = {id: login.id, email: login.email}
+        let payload = {id: login.user_Id, email: login.email}
         let jwtValue = JWT.sign(payload, "cobajwt")
         return h.response({"message": "success", "token": jwtValue})
     } catch (error) {
@@ -101,4 +101,23 @@ const registerController  = async (request: Request, h: ResponseToolkit): Promis
 
 }
 
-export {loginController, registerController}
+const profileController = async (request: Request, h: ResponseToolkit): Promise<any> => {
+    let repository = new AuthRepository()
+    let auth = request.auth.credentials as any
+    let value = await repository.getUserById({id: auth.id})
+    console.log(value, auth)
+    if (value != undefined) {
+        return h.response({"message": "success", "data": {
+            id: value.user_Id,
+            username: value.username,
+            email: value.email,
+        }})
+
+    } else {
+        return h.response({"message": "error", "data": "user not found"})
+    }
+
+    
+}
+
+export {loginController, registerController, profileController}

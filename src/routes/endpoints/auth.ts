@@ -1,6 +1,6 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { iroute } from "../../config/interfaces";
-import {loginController, registerController} from "../../controllers/auth.controller"
+import {loginController, profileController, registerController} from "../../controllers/auth.controller"
 
 const loginRoutes: iroute = {
     method: "POST",
@@ -16,4 +16,11 @@ const registerRoutes: iroute = {
     config: {auth: false}
 }
 
-export {loginRoutes, registerRoutes}
+const profileRoutes: iroute = {
+    method: "GET",
+    path: "/profile",
+    handler: profileController,
+    config: {auth: "jwt"}
+}
+
+export {loginRoutes, registerRoutes, profileRoutes}

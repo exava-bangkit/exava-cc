@@ -6,8 +6,7 @@
   "homepage": "https://www.nomado.eu",
   "main": "main.ts",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
-    "build:tsc": "tsc",
+    "build": "tsc",
     "start": "ts-node main.ts",
     "dev": "nodemon",
     "test": "jest",

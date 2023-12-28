@@ -54,7 +54,7 @@ export default class AuthRepository {
     }
     getUserById = (payload: GetUserByIdBody): Promise<User> => {
         return new Promise((resolve, reject) => {
-            connection.query<User[]>("SELECT * FROM user WHERE id = ?", [payload.id], (err, res) => {
+            connection.query<User[]>("SELECT * FROM user WHERE user_Id = ?", [payload.id], (err, res) => {
                 if(err) reject(err)
                 else resolve(res?.[0])
             })

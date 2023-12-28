@@ -9,3 +9,6 @@ coverage
 
 # dotenv
 .env
+
+yarn.yaml
+pnpm-lock.yaml

@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt'
 export interface RegisterBody {
     username: string;
     email: string;
+    name: string;
     password: string
 }
 
@@ -25,7 +26,7 @@ export default class AuthRepository {
         let today = new Date()
         let dateString = today.toISOString().slice(0, 10)
         return new Promise((resolve, reject) => {
-            connection.query<ResultSetHeader>("INSERT INTO exava.user (username, email, password, nama, Location, Age) VALUES(?, ?, ?, ?, ?)", [payload.username, payload.email, "Lorem Ipsum", "Jakarta Selatan, DKI Jakarta", 23], (err, res) => {
+            connection.query<ResultSetHeader>("INSERT INTO exava.user(username, password, email, nama, Location, Age) VALUES(?, ?, ?, ?, ?, ?)", [payload.username, hash, payload.email, payload.name, "Jakarta Selatan, DKI Jakarta", 23], (err, res) => {
                 if (err) reject(err)
                 else this.getUserById({id: res.insertId} as GetUserByIdBody)
                     .then((item) => resolve(item))
